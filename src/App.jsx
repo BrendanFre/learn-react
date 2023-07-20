@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import PropTypes from "prop-types";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -24,13 +25,25 @@ function App() {
       reminder: true,
     },
   ]);
-
+  // Delete Task
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
   return (
     <div className="container">
       <Header />
-      <Tasks tasks={tasks} />
+      {tasks.length > 0 ? (
+        <Tasks tasks={tasks} onDelete={deleteTask} />
+      ) : (
+        <h3>No Tasks</h3>
+      )}
     </div>
   );
 }
+
+App.propTypes = {
+  tasks: PropTypes.object,
+  setTasks: PropTypes.func,
+};
 
 export default App;
