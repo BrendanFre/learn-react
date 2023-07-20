@@ -1,12 +1,11 @@
 import { PropTypes } from "prop-types";
+import Task from "./Task";
 const Tasks = ({ tasks }) => {
   return (
     <>
       {tasks.map((task) => (
         <div key={task.id}>
-          <h3>{task.text}</h3>
-          <p>Date Due: {task.day}</p>
-          <p>{task.reminder}</p>
+          <Task key={task.id} task={task} />
         </div>
       ))}
     </>
